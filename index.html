@@ -3,45 +3,28 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>AR Room Layout</title>
+    <title>Auto AR View</title>
     <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.3.0/model-viewer.min.js"></script>
-    <style>
-      body {
-        margin: 0;
-        height: 100vh;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        background-color: #000;
-      }
-      model-viewer {
-        width: 100%;
-        height: 100%;
-      }
-      .ar-button {
-        position: absolute;
-        bottom: 20px;
-        left: 50%;
-        transform: translateX(-50%);
-        background-color: #fff;
-        border: none;
-        padding: 12px 24px;
-        border-radius: 50px;
-        font-size: 16px;
-        cursor: pointer;
-      }
-    </style>
   </head>
-  <body>
+  <body style="margin:0;">
     <model-viewer
-      src="./room.glb"
-      camera-controls
-      auto-rotate
+      id="roomModel"
+      src="./3_d_portfolio_website_scroll_to_explore_copy.glb"
       ar
       ar-modes="webxr scene-viewer quick-look"
-      shadow-intensity="1"
-      alt="Room Layout"
-      ios-src="./room.usdz">
+      camera-controls
+      autoplay
+      style="width:100%; height:100vh;"
+      shadow-intensity="1">
     </model-viewer>
+
+    <script>
+      window.onload = () => {
+        const mv = document.getElementById("roomModel");
+        setTimeout(() => {
+          mv.activateAR(); // tries to launch AR automatically
+        }, 1000);
+      };
+    </script>
   </body>
 </html>
