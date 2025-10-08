@@ -3,28 +3,60 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Auto AR View</title>
+    <title>View Room in AR</title>
+
+    <!-- Import model-viewer -->
     <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.3.0/model-viewer.min.js"></script>
+
+    <style>
+      body {
+        margin: 0;
+        background-color: #000;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+      }
+
+      model-viewer {
+        width: 100%;
+        height: 100%;
+      }
+
+      button {
+        position: absolute;
+        bottom: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: #fff;
+        border: none;
+        padding: 14px 26px;
+        border-radius: 30px;
+        font-size: 18px;
+        font-weight: 600;
+        cursor: pointer;
+      }
+    </style>
   </head>
-  <body style="margin:0;">
+
+  <body>
     <model-viewer
       id="roomModel"
       src="./room.glb"
+      camera-controls
       ar
       ar-modes="webxr scene-viewer quick-look"
-      camera-controls
-      autoplay
-      style="width:100%; height:100vh;"
-      shadow-intensity="1">
+      shadow-intensity="1"
+      alt="Room Layout"
+      ios-src="./room.usdz">
     </model-viewer>
 
+    <button onclick="startAR()">👀 View in AR</button>
+
     <script>
-      window.onload = () => {
-        const mv = document.getElementById("roomModel");
-        setTimeout(() => {
-          mv.activateAR(); // tries to launch AR automatically
-        }, 1000);
-      };
+      function startAR() {
+        document.getElementById("roomModel").activateAR();
+      }
     </script>
   </body>
 </html>
